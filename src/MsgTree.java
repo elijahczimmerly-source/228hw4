@@ -55,6 +55,7 @@ public class MsgTree {
         Scanner scnr = new Scanner(msg);
         //codes is the root
         MsgTree current = codes;
+        System.out.println("MESSAGE:");
         while(scnr.hasNext()){
             String nextChar = scnr.next();
             if(nextChar.equals("0")) current = current.left;
