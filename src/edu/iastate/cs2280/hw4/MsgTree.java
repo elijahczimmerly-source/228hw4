@@ -71,13 +71,22 @@ public class MsgTree {
     }
 
     public static void main (String[] args){
-        Scanner scnr = new Scanner(System.in);
-        System.out.println("Please enter a filename to decode:");
-        String filename = scnr.nextLine();
-        scnr.close();
+        String filename;
+
+        // Check if a filename was provided as a command-line argument
+        if (args.length > 0) {
+            filename = args[0];
+        } else {
+            // Fallback to interactive input if no argument is provided
+            Scanner scnr = new Scanner(System.in);
+            System.out.println("Please enter a filename to decode:");
+            filename = scnr.nextLine();
+            scnr.close();
+        }
+
         File file = new File(filename);
         if (!file.exists()) {
-            System.out.println("File does not exist");
+            System.out.println("File does not exist: " + filename);
             return;
         }
         String fullContent = "";
