@@ -38,11 +38,11 @@ public class MsgTree {
     //method to print characters and their binary codes
     public static void printCodes(MsgTree root, String code){
         if(code.equals("")){
-            Sytem.out.println("character code\n-------------------------");
+            System.out.println("character code\n-------------------------");
         }
         if(root == null) return;
-        if(payloadChar != null){
-            System.out.println("   " + payloadChar + "       " + code);
+        if(root.payloadChar != 0){
+            System.out.println("   " + root.payloadChar + "       " + code);
         }
         else{
             printCodes(root.left, code + "0");
