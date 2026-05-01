@@ -31,10 +31,24 @@ public class MsgTree {
     }
 
     //Constructor for a single node with null children
-    public MsgTree(char payloadChar){}
+    public MsgTree(char payloadChar){
+        this.payloadChar = payloadChar;
+    }
 
     //method to print characters and their binary codes
-    public static void printCodes(MsgTree root, String code){}
+    public static void printCodes(MsgTree root, String code){
+        if(code.equals("")){
+            Sytem.out.println("character code\n-------------------------");
+        }
+        if(root == null) return;
+        if(payloadChar != null){
+            System.out.println("   " + payloadChar + "       " + code);
+        }
+        else{
+            printCodes(root.left, code + "0");
+            printCodes(root.right, code + "1");
+        }
+    }
 
     //method to decode a message using the provided encoding tree
     public void decode(MsgTree codes, String msg){}
@@ -73,7 +87,7 @@ public class MsgTree {
         while(fileScnr.hasNextLine()){
             code += fileScnr.nextLine();
         }
-        printCodes(root, code);
+        printCodes(root, "");
         root.decode(root, code);
 
 
