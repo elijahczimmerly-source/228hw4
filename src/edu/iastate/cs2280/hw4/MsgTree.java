@@ -80,31 +80,30 @@ public class MsgTree {
             System.out.println("File does not exist");
             return;
         }
-        String encodingString = "";
-        String code = "";
-        Scanner fileScnr = null;
+        String fullContent = "";
         try {
-            fileScnr = new Scanner(file);
+            Scanner fileScnr = new Scanner(file);
+            // Read everything into one string, preserving newlines
+            while (fileScnr.hasNextLine()) {
+                fullContent += fileScnr.nextLine() + "\n";
+            }
+            fileScnr.close();
         } catch (Exception e) {
             System.out.println("Error reading file");
             return;
         }
 
-        // Read the first line of the tree
-        if (fileScnr.hasNextLine()) {
-            encodingString = fileScnr.nextLine();
-        }
-        // Read the second line of the tree and join them with a newline
-        if (fileScnr.hasNextLine()) {
-            encodingString += "\n" + fileScnr.nextLine();
-        }
-        MsgTree root = new MsgTree(encodingString);
+        staticCharIdx = 0;
 
-        while(fileScnr.hasNextLine()){
-            code += fileScnr.nextLine();
+        MsgTree root = new MsgTree(fullContent);
+        String code = "";
+        if (staticCharIdx < fullContent.length()) {
+            // .trim() removes the extra newlines between the tree and the bits
+            code = fullContent.substring(staticCharIdx).trim();
         }
-        fileScnr.close();
+
         printCodes(root, "");
         root.decode(root, code);
+
     }
 }
