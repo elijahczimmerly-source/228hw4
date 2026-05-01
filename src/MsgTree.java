@@ -57,10 +57,10 @@ public class MsgTree {
         System.out.println("MESSAGE:");
         staticCharIdx = 0;
         while(staticCharIdx < msg.length()){
-            char nextChar = msg.charAt(staticCharIdx);
-            if(nextChar == '0') current = current.left;
+            if(msg.charAt(staticCharIdx) == '0') current = current.left;
             else current = current.right;
             if(current.payloadChar != 0){
+                System.out.print(current.payloadChar);
                 current = codes;
             }
             staticCharIdx++;
