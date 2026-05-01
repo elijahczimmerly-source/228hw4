@@ -41,7 +41,7 @@ public class MsgTree {
             System.out.println("character code\n-------------------------");
         }
         if(root == null) return;
-        if(root.payloadChar != 0){
+        if(root.left == null && root.right == null){
             System.out.println("   " + root.payloadChar + "       " + code);
         }
         else{
@@ -55,17 +55,17 @@ public class MsgTree {
         //codes is the root
         MsgTree current = codes;
         System.out.println("MESSAGE:");
-        staticCharIdx = 0;
-        while(staticCharIdx < msg.length()){
-            if(msg.charAt(staticCharIdx) == '0') current = current.left;
-            else current = current.right;
-            if(current.payloadChar != 0){
+
+        for(int i = 0; i < msg.length(); i++){
+            char bit = msg.charAt(i);
+            if(bit == '0') current = current.left;
+            else if (bit == '1') current = current.right;
+            if(current.left == null && current.right == null){
                 System.out.print(current.payloadChar);
-                current = codes;
+                current = codes; //reset to root
             }
-            staticCharIdx++;
         }
-        staticCharIdx = 0;
+        System.out.println();
     }
 
     public static void main (String[] args){
@@ -88,16 +88,13 @@ public class MsgTree {
             return;
         }
 
+        // Read the first line of the tree
         if (fileScnr.hasNextLine()) {
             encodingString = fileScnr.nextLine();
         }
-        // Handle cases where tree spans multiple lines (twocities.arch)
+        // Read the second line of the tree and join them with a newline
         if (fileScnr.hasNextLine()) {
-            String next = fileScnr.nextLine();
-            if (!(next.contains("0") || next.contains("1"))){
-                encodingString += "\n" + next;
-            }
-            else code += next;
+            encodingString += "\n" + fileScnr.nextLine();
         }
         MsgTree root = new MsgTree(encodingString);
 
