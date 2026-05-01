@@ -11,7 +11,24 @@ public class MsgTree {
     private static int staticCharIdx = 0;
 
     //Constructor building the tree from a string
-    public MsgTree(String encodingString){}
+    public MsgTree(String encodingString){
+        if (encodingString == null || encodingString.isEmpty()) {
+            throw new IllegalArgumentException("Encoding string cannot be null or empty");
+        }
+        if(staticCharIdx >= encodingString.length()){
+            return;
+        }
+        char currentChar = encodingString.charAt(staticCharIdx);
+        staticCharIdx++;
+        if(currentChar == '^'){
+            left = new MsgTree(encodingString);
+            right = new MsgTree(encodingString);
+        }
+        else{
+            payloadChar = currentChar;
+        }
+
+    }
 
     //Constructor for a single node with null children
     public MsgTree(char payloadChar){}
