@@ -52,20 +52,20 @@ public class MsgTree {
 
     //method to decode a message using the provided encoding tree
     public void decode(MsgTree codes, String msg){
-        Scanner scnr = new Scanner(msg);
         //codes is the root
         MsgTree current = codes;
         System.out.println("MESSAGE:");
-        while(scnr.hasNext()){
-            String nextChar = scnr.next();
-            if(nextChar.equals("0")) current = current.left;
+        staticCharIdx = 0;
+        while(staticCharIdx < msg.length()){
+            char nextChar = msg.charAt(staticCharIdx);
+            if(nextChar == '0') current = current.left;
             else current = current.right;
             if(current.payloadChar != 0){
-                System.out.print(current.payloadChar);
                 current = codes;
             }
+            staticCharIdx++;
         }
-        scnr.close();
+        staticCharIdx = 0;
     }
 
     public static void main (String[] args){
@@ -97,6 +97,7 @@ public class MsgTree {
             if (!(next.contains("0") || next.contains("1"))){
                 encodingString += "\n" + next;
             }
+            else code += next;
         }
         MsgTree root = new MsgTree(encodingString);
 
