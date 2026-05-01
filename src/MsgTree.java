@@ -51,12 +51,17 @@ public class MsgTree {
     }
 
     //method to decode a message using the provided encoding tree
-    public void decode(MsgTree codes, String msg){}
+    public void decode(MsgTree codes, String msg){
+        Scanner scnr = new Scanner(msg);
+        
+        scnr.close();
+    }
 
     public static void main (String[] args){
         Scanner scnr = new Scanner(System.in);
         System.out.println("Please enter a filename to decode:");
         String filename = scnr.nextLine();
+        scnr.close();
         File file = new File(filename);
         if (!file.exists()) {
             System.out.println("File does not exist");
@@ -87,11 +92,8 @@ public class MsgTree {
         while(fileScnr.hasNextLine()){
             code += fileScnr.nextLine();
         }
+        fileScnr.close();
         printCodes(root, "");
         root.decode(root, code);
-
-
-
-
     }
 }
