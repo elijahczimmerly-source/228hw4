@@ -53,7 +53,17 @@ public class MsgTree {
     //method to decode a message using the provided encoding tree
     public void decode(MsgTree codes, String msg){
         Scanner scnr = new Scanner(msg);
-        
+        //codes is the root
+        MsgTree current = codes;
+        while(scnr.hasNext()){
+            String nextChar = scnr.next();
+            if(nextChar.equals("0")) current = current.left;
+            else current = current.right;
+            if(current.payloadChar != 0){
+                System.out.print(current.payloadChar);
+                current = codes;
+            }
+        }
         scnr.close();
     }
 
