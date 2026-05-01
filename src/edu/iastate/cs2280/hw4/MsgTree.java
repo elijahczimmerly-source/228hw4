@@ -1,3 +1,5 @@
+package edu.iastate.cs2280.hw4;
+
 import java.util.Scanner;
 import java.io.File;
 
